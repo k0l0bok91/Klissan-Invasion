@@ -18,13 +18,20 @@ class KlissanInvasion:
     def run_game(self):
         """Запуск основного цикла игры"""
         while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
+            self._update_screen()
 
-            self.screen.blit(self.settings.bg_image, (0, 0))
-            self.ship.blitme()
-            pygame.display.flip()
+    def _check_events(self):
+        """Обрабатывает нажатие клавиш и событий мыши"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+    def _update_screen(self):
+        """Обновляет изображения на экране и отображает новый экран"""
+        self.screen.blit(self.settings.bg_image, (0, 0))
+        self.ship.blitme()
+        pygame.display.flip()
 
 
 if __name__ == "__main__":
