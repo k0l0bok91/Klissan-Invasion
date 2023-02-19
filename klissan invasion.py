@@ -41,8 +41,7 @@ class KlissanInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
-
-    def _check_keydown_events(self,event):
+    def _check_keydown_events(self, event):
         """Реагирует на нажатие клавиш"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
@@ -53,8 +52,7 @@ class KlissanInvasion:
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
 
-
-    def _check_keyup_events(self,event):
+    def _check_keyup_events(self, event):
         """Реагирует на отпускание клавиш"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
