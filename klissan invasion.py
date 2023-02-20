@@ -12,10 +12,10 @@ class KlissanInvasion:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
-        # self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Klissan Invasion")
         pygame.display.set_icon(self.settings.icon_image)
 
@@ -88,11 +88,11 @@ class KlissanInvasion:
         klissan = Klissan(self)
         klissan_width, klissan_height = klissan.rect.size
         available_space_x = self.settings.screen_width - (2 * klissan_width)
-        number_klissans_x = available_space_x // (1 * klissan_width)
+        number_klissans_x = available_space_x // (2 * klissan_width)
 
         """Определяет количество рядов, помещающихся на экран"""
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * klissan_height) - ship_height)
+        available_space_y = (self.settings.screen_height - (2 * klissan_height) - ship_height)
         number_rows = available_space_y // (2 * klissan_height)
 
         for row_number in range(number_rows):
