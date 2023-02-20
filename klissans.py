@@ -25,14 +25,6 @@ class Klissan(Sprite):
         if self.rect.right == screen_rect.right or self.rect.left == 0:
             return True
 
-    # def check_edges(self):
-    #     """Возвращает True, если пришелец находится у края экрана."""
-    #     screen_rect = self.screen.get_rect()
-    #     if self.rect.bottom == screen_rect.bottom:
-    #         return True
-    #     elif self.rect.top == 0:
-    #         return True
-
     def update(self, ai_game):
         """Перемещение пришельца"""
         self.x += (self.settings.klissan_speed * self.settings.fleet_direction)
