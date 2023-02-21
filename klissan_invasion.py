@@ -42,9 +42,12 @@ class KlissanInvasion:
 
     def run_game(self):
         """Запуск основного цикла игры"""
+
+        self.settings.fps.tick()
+
         while True:
             self._check_events()
-
+            print(self.settings.fps)
             if self.stats.game_active:
                 self.ship.update()
                 self._update_bullets()

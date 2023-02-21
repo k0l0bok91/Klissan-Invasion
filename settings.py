@@ -9,19 +9,20 @@ class Settings:
         self.screen_width = 1200
         self.screen_height = 800
         self.fullscreen_mode_on = False
+        self.fps = pygame.time.Clock()
         self.bg_image = pygame.image.load('images/space.jpg')
         self.icon_image = pygame.image.load('images/alien_ship.png')
 
-        self.ship_speed = 15
+        self.ship_speed = 7
         self.ship_limit = 4
 
-        self.bullet_speed = 2
-        self.bullet_width = 300
-        self.bullet_height = 15
-        self.bullet_color = (60, 200, 60)
+        self.bullet_speed = 4
+        self.bullet_width = 5
+        self.bullet_height = 20
+        self.bullet_color = (60, 250, 60)
         self.bullet_allowed = 4
-        self.bullet_type = False
+        self.bullet_type = True
 
         self.klissan_speed = 1
-        self.fleet_drop_speed = 30
+        self.fleet_drop_speed = 10
         self.fleet_direction = 1
