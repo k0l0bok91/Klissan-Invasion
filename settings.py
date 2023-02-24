@@ -9,7 +9,7 @@ class Settings:
         self.screen_width = 1200
         self.screen_height = 800
         self.fullscreen_mode_on = False
-        self.fps = pygame.time.Clock()
+
         self.bg_image = pygame.image.load('images/space.jpg')
         self.icon_image = pygame.image.load('images/alien_ship.png')
 
@@ -26,3 +26,5 @@ class Settings:
         self.klissan_speed = 1
         self.fleet_drop_speed = 10
         self.fleet_direction = 1
+
+

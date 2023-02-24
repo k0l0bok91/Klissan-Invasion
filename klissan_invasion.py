@@ -6,7 +6,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
-from klissans import Klissan
+from klissan import Klissan
 from game_stats import GameStats
 
 
@@ -43,15 +43,16 @@ class KlissanInvasion:
     def run_game(self):
         """Запуск основного цикла игры"""
 
-        self.settings.fps.tick()
+        game_over = False
 
-        while True:
+        while not game_over:
             self._check_events()
             if self.stats.game_active:
                 self.ship.update()
                 self._update_bullets()
                 self._update_klissans()
 
+            pygame.time.Clock().tick(500)
             self._update_screen()
 
     def _check_events(self):
@@ -73,7 +74,7 @@ class KlissanInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_ESCAPE:
-            sys.exit()
+            game_over == True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
 
@@ -137,6 +138,15 @@ class KlissanInvasion:
             self._ship_hit()
 
         self._check_klissans_bottom()
+
+    def _update_bullets(self):
+        """Обновляет позицию снарядов и уничтожение страрых снарядов"""
+        self.bullets.update()
+
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        self._check_bullet_klissan_collision()
 
     def _create_fleet(self):
         """Создание флота вторжения"""
