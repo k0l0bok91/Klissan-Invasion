@@ -74,7 +74,7 @@ class KlissanInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_ESCAPE:
-            game_over == True
+            sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
 
@@ -102,7 +102,7 @@ class KlissanInvasion:
 
     def _check_bullet_klissan_collision(self):
         """Обработка коллизий снарядов и Клиссан"""
-        collisions = pygame.sprite.groupcollide(self.bullets, self.klissans, self.settings.bullet_type, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.klissans, self.settings.bullet_not_god_mode, True)
         if not self.klissans:
             self.bullets.empty()
             self._create_fleet()

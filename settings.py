@@ -21,10 +21,8 @@ class Settings:
         self.bullet_height = 20
         self.bullet_color = (60, 250, 60)
         self.bullet_allowed = 4
-        self.bullet_type = True
+        self.bullet_not_god_mode = not False
 
         self.klissan_speed = 1
         self.fleet_drop_speed = 10
         self.fleet_direction = 1
-
-
