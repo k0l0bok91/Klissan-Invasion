@@ -5,7 +5,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
-from bullet import Bullet
+from bolts import Bolts
 from klissan import Klissan
 from game_stats import GameStats
 
@@ -27,7 +27,7 @@ class KlissanInvasion:
         self.stats = GameStats(self)
 
         self.ship = Ship(self)
-        self.bullets = pygame.sprite.Group()
+        self.bolt = Bolts(self)
         self.klissans = pygame.sprite.Group()
 
         self._create_fleet()
@@ -49,7 +49,7 @@ class KlissanInvasion:
             self._check_events()
             if self.stats.game_active:
                 self.ship.update()
-                self._update_bullets()
+                self.bolt.update_bolts()
                 self._update_klissans()
 
             pygame.time.Clock().tick(500)
@@ -87,24 +87,15 @@ class KlissanInvasion:
 
     def _fire_bullet(self):
         """Создание нового снаряда и включение его в группу bullets"""
-        if len(self.bullets) < self.settings.bullet_allowed:
-            new_bullet = Bullet(self)
-            self.bullets.add(new_bullet)
-
-    def _update_bullets(self):
-        """Обновляет позицию снарядов и уничтожение страрых снарядов"""
-        self.bullets.update()
-
-        for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
-        self._check_bullet_klissan_collision()
+        if len(self.bolt) < self.settings.bolt_allowed:
+            new_bullet = Bolts(self)
+            self.bolt.add(new_bullet)
 
     def _check_bullet_klissan_collision(self):
         """Обработка коллизий снарядов и Клиссан"""
-        collisions = pygame.sprite.groupcollide(self.bullets, self.klissans, self.settings.bullet_not_god_mode, True)
+        collisions = pygame.sprite.groupcollide(self.bolt, self.klissans, self.settings.bolt_not_god_mode, True)
         if not self.klissans:
-            self.bullets.empty()
+            self.bolt.empty()
             self._create_fleet()
 
     def _ship_hit(self):
@@ -113,7 +104,7 @@ class KlissanInvasion:
             self.stats.ships_left -= 1
 
             self.klissans.empty()
-            self.bullets.empty()
+            self.bolt.empty()
 
             self._create_fleet()
             self.ship.center_ship()
@@ -139,13 +130,9 @@ class KlissanInvasion:
 
         self._check_klissans_bottom()
 
-    def _update_bullets(self):
-        """Обновляет позицию снарядов и уничтожение страрых снарядов"""
-        self.bullets.update()
-
-        for bullet in self.bullets.copy():
+        for bullet in self.bolt.copy():
             if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
+                self.bolt.remove(bullet)
         self._check_bullet_klissan_collision()
 
     def _create_fleet(self):
@@ -190,7 +177,7 @@ class KlissanInvasion:
         """Обновляет изображения на экране и отображает новый экран"""
         self.screen.blit(self.settings.bg_image, (0, 0))
         self.ship.blitme()
-        for bullet in self.bullets.sprites():
+        for bullet in self.bolt.sprites():
             bullet.draw_bullet()
         self.klissans.draw(self.screen)
 
